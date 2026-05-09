@@ -1,1 +1,1 @@
-alert("inicio de proyecto");
+console.log("Hola");
