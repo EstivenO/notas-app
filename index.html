@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicacion de seguimiento de Calificaciones</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -24,22 +24,22 @@
                         <label class="form__label" for="inputMateria">Materia:</label>
                         <input class="form__input" type="text" name="inputMateria" id="inputMateria" placeholder="Ingresa la Materia a la cual le vamos agregar la Calificacion">
                         <label class="form__label" for="inputCalificacion">Calificacion:</label>
-                        <input class="form__input" type="text" name="inputCalificacion" id="inputCalificacion" placeholder="Ingresa la Caificacion optenida en la materia">
+                        <input class="form__input" type="number" name="inputCalificacion" id="inputCalificacion" placeholder="Ingresa la Caificacion optenida en la materia">
                         <button class="form__button" id="btnAgregar" type="button">Agregar</button>
                     </fieldset>
                 </form>
             </section>
-            <section class="materias">
+            <section class="materias" id="listaMaterias">
                 <article class="materia">
-                    <h2 id="materia__title">Matematicas</h2>
-                    <p id="materia__content"> 3.9</p>
+                    <h2 class="materia__title">Matematicas</h2>
+                    <p class="materia__content"> 3.9</p>
                 </article>
             </section>
         </div>
     </main>
     <footer>
         <div class="container">
-            <h1 class="foote__title">Estiven Ortiz Z</h1>
+            <h1 class="footer__title">Estiven Ortiz Z</h1>
         </div>
     </footer>
 </body>
