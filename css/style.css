@@ -3,3 +3,30 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/*Variables Principales*/
+:root {
+    /*Colores*/
+    --color-bg: #f4f4f4;
+    --color-texto: #333;
+    --color-primary: #2ecc71;
+    --color-completed: #009688;
+    /*espaciado*/
+    --spacing-sm: 10px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+}
+
+/*Tipografia base*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-texto);
+}
+
+/*Layouth*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
