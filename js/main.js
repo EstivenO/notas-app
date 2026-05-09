@@ -1,0 +1,1 @@
+alert("inicio de proyecto");
