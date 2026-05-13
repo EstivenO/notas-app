@@ -131,8 +131,30 @@ body {
     flex-direction: column;
 }
 
+
+.materia__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  padding-left: 5px;
+  background-color: var(--color-primary);
+}
+
+
+.materia__star {
+  width: 40px;
+  height: 40px;
+  opacity: 0.1;
+  cursor: pointer;
+}
+
+
+.materia__star--active {
+  opacity: 1;
+}
+
+
 .materia__title {
-    background-color: var(--color-primary);
     color: white;
     text-align: center;
 }
