@@ -171,6 +171,17 @@ body {
     text-align: center;
 }
 
+.materias__msj {
+    margin-top: var(--spacing-sm);
+    color: red;
+    display: none;
+    font-size: 0.9rem;
+}
+
+.materias_msjVisible {
+    display: block;
+}
+
 
 
 
