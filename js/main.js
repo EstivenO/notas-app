@@ -14,5 +14,25 @@ const mensajeValidacion = document.querySelector("#mensaje");
 
 const materias = [];
 
+// ==========================
+// Evento: agregar tarea
+// ==========================
+
+btnAgregarMateria.addEventListener("click", () => {
+
+    let textoMateria = inputMateria.value.trim();
+    let textoCalificacion = inputCalificacion.value.trim();
+
+    if(textoMateria === "" && textoCalificacion === "") {
+        mensajeValidacion.textContent = "No ingresaste informacion de la materia";
+        mensajeValidacion.classList.add("materias__msjVisible");
+        return;
+    }
+
+    mensajeValidacion.classList.remove("materias__msjVisible");
+
+
+});
+
 
 
