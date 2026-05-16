@@ -31,13 +31,13 @@ btnAgregarMateria.addEventListener("click", () => {
 
     mensajeValidacion.classList.remove("materias__msjVisible");
 
-    materiaHeader();
+    crearMateria();
 
     
 });
 
 
-function materiaHeader () {
+function crearMateria () {
     
     // creacion de elementos 
     let divContenedor = document.createElement("div");
@@ -51,13 +51,31 @@ function materiaHeader () {
     imagenArticulo.src = "assets/icons/star.svg";
     imagenArticulo.alt = "estrella de prioidad";
     
-    //agregando a nodo
+    //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
 
-    console.log(divContenedor);
+    //adicionar a el articulo
+    crearArticulo(divContenedor);
 
+   
+}
 
+function crearArticulo(elemento){
+    let articulo = document.createElement("article");
+    let parrafo = document.createElement("p");
+    
+    articulo.classList.add("materia");
+    parrafo.classList.add("materia__content");
+    
+    articulo.appendChild(elemento);
+    articulo.appendChild(parrafo);
+
+    listaMaterias.appendChild(articulo);
+
+     console.log(listaMaterias);
+    
+    
 }
 
 
