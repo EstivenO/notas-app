@@ -15,13 +15,29 @@ const mensajeValidacion = document.querySelector("#mensaje");
 const materias = [];
 
 // ==========================
+// Carga inicial desde localStorage
+// ==========================
+const materiasGuardadas = localStorage.getItem("materias");
+
+if( materiasGuardadas === null ) {
+  
+}else{
+    const materiasString =JSON.parse(materiasGuardadas);
+    for(let materia of materiasString) {
+        materias.push(materia);
+        renderMateria(materia);
+    }
+};
+
+
+// ==========================
 // Evento: agregar tarea
 // ==========================
 
 btnAgregarMateria.addEventListener("click", () => {
 
-    let textoMateria = inputMateria.value.trim();
-    let textoCalificacion = inputCalificacion.value.trim();
+    const textoMateria = inputMateria.value.trim();
+    const textoCalificacion = inputCalificacion.value.trim();
 
      if(textoMateria === "" || textoCalificacion === "") {
         mensajeValidacion.textContent = "No ingresaste informacion de la materia";
@@ -31,11 +47,19 @@ btnAgregarMateria.addEventListener("click", () => {
       if(!validaciones(textoMateria,textoCalificacion)) {
         return;
       };
-    
-    
+
     mensajeValidacion.classList.remove("materias__msjVisible");
 
-    crearMateria(textoMateria,textoCalificacion);
+    const materia = {
+        nombre: textoMateria,
+        calificacion: parseFloat(textoCalificacion),
+        importante: false
+    }
+
+    materias.push(materia);
+    localStorage.setItem("materias", JSON.stringify(materias))
+
+    renderMateria(materia);
 
     inputMateria.value  = "";
     inputCalificacion.value = "";
@@ -44,7 +68,7 @@ btnAgregarMateria.addEventListener("click", () => {
 });
 
 
-function crearMateria (materia,calificacion) {
+function renderMateria (materia) {
     
     // creacion de elementos 
     let divContenedor = document.createElement("div");
@@ -54,17 +78,19 @@ function crearMateria (materia,calificacion) {
     //adicion de propiedades
     divContenedor.classList.add("materia__header");
     tituloArticulo.classList.add("materia__title");
-    tituloArticulo.textContent = materia;
+    tituloArticulo.textContent = materia.nombre;
     imagenArticulo.classList.add("materia__star");
     imagenArticulo.src = "assets/icons/star.svg";
     imagenArticulo.alt = "estrella de prioidad";
+
+    
     
     //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
 
     //adicionar a el articulo
-    crearArticulo(divContenedor,calificacion);
+    crearArticulo(divContenedor,materia.calificacion);
 
    
 }
