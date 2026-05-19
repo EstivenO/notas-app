@@ -85,14 +85,16 @@ function renderMateria (materia) {
 
     materiaImportante(imagenArticulo, materia.nombre);
 
+    if(materia.importante) {
+        imagenArticulo.classList.toggle("materia__star--active")
+    }
+
 
     //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
 
-    if(materia.importante) {
-        imagenArticulo.classList.toggle("materia__star--active")
-    }
+   
     //adicionar a el articulo
     crearArticulo(divContenedor,materia.calificacion);
 
