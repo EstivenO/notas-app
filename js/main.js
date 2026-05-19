@@ -83,8 +83,9 @@ function renderMateria (materia) {
     imagenArticulo.src = "assets/icons/star.svg";
     imagenArticulo.alt = "estrella de prioidad";
 
-    
-    
+    materiaImportante(imagenArticulo);
+
+
     //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
@@ -139,7 +140,22 @@ function validaciones(materia,calificacion) {
 
     return true;
 
-
 }
 
+function materiaImportante(estrella) {
+    estrella.addEventListener("click", ()=>{
+        let materiasGuardada = JSON.parse(localStorage.getItem("materias"));
+        materiasGuardada.forEach(materia => {
+            if(materia.importante){
+                materia.importante = false;
+                return;
+            }
+
+            materia.importante = true;
+        });
+        materias.push(...materiasGuardada);
+        localStorage.setItem("materias", JSON.stringify(materiasGuardada));
+        estrella.classList.add("materia__star--active")
+    })
+}
 
