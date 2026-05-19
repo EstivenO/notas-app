@@ -119,11 +119,6 @@ function crearArticulo(elemento,calificacion){
 
 function validaciones(materia,calificacion) {
 
-    calificacion = parseInt(calificacion);
-
-    mensajeValidacion.textContent = "";
-
-
     if (isNaN(calificacion)) {
         mensajeValidacion.textContent = "Debes ingresar una calificación numérica";
         mensajeValidacion.classList.add("materias__msjVisible");
@@ -148,6 +143,7 @@ function validaciones(materia,calificacion) {
 }
 
 function materiaImportante(estrella, textoMateria) {
+    
     estrella.addEventListener("click", ()=>{
         let materiasGuardada = JSON.parse(localStorage.getItem("materias"));
         materiasGuardada.forEach(materia => {
@@ -162,6 +158,6 @@ function materiaImportante(estrella, textoMateria) {
         materias.push(...materiasGuardada);
         localStorage.setItem("materias", JSON.stringify(materiasGuardada));
         estrella.classList.toggle("materia__star--active")
-    })
+    });
 }
 
