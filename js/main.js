@@ -83,13 +83,16 @@ function renderMateria (materia) {
     imagenArticulo.src = "assets/icons/star.svg";
     imagenArticulo.alt = "estrella de prioidad";
 
-    materiaImportante(imagenArticulo);
+    materiaImportante(imagenArticulo, materia.nombre);
 
 
     //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
 
+    if(materia.importante) {
+        imagenArticulo.classList.toggle("materia__star--active")
+    }
     //adicionar a el articulo
     crearArticulo(divContenedor,materia.calificacion);
 
@@ -142,20 +145,21 @@ function validaciones(materia,calificacion) {
 
 }
 
-function materiaImportante(estrella) {
+function materiaImportante(estrella, textoMateria) {
     estrella.addEventListener("click", ()=>{
         let materiasGuardada = JSON.parse(localStorage.getItem("materias"));
         materiasGuardada.forEach(materia => {
-            if(materia.importante){
-                materia.importante = false;
-                return;
+            if(textoMateria === materia.nombre){
+                if(materia.importante){
+                    materia.importante = false;
+                    return;
+                }
+                materia.importante = true;
             }
-
-            materia.importante = true;
         });
         materias.push(...materiasGuardada);
         localStorage.setItem("materias", JSON.stringify(materiasGuardada));
-        estrella.classList.add("materia__star--active")
+        estrella.classList.toggle("materia__star--active")
     })
 }
 
