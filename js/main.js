@@ -39,14 +39,15 @@ btnAgregarMateria.addEventListener("click", () => {
     const textoMateria = inputMateria.value.trim();
     const textoCalificacion = inputCalificacion.value.trim();
 
-     if(textoMateria === "" || textoCalificacion === "") {
+    if(textoMateria === "" || textoCalificacion === "") {
         mensajeValidacion.textContent = "No ingresaste informacion de la materia";
         mensajeValidacion.classList.add("materias__msjVisible");
         return;
     } 
-      if(!validaciones(textoMateria,textoCalificacion)) {
-        return;
-      };
+    
+    if(!validaciones(textoMateria,textoCalificacion)) {
+       return;
+    };
 
     mensajeValidacion.classList.remove("materias__msjVisible");
 
@@ -86,15 +87,13 @@ function renderMateria (materia) {
     materiaImportante(imagenArticulo, materia.nombre);
 
     if(materia.importante) {
-        imagenArticulo.classList.toggle("materia__star--active")
+        imagenArticulo.classList.add("materia__star--active")
     }
-
 
     //agregando a nodo principal
     divContenedor.appendChild(tituloArticulo);
     divContenedor.appendChild(imagenArticulo);
 
-   
     //adicionar a el articulo
     crearArticulo(divContenedor,materia.calificacion);
 
@@ -119,7 +118,9 @@ function crearArticulo(elemento,calificacion){
 
 function validaciones(materia,calificacion) {
 
-    if (isNaN(calificacion)) {
+    let nota = parseFloat(calificacion);
+
+    if (isNaN(nota)) {
         mensajeValidacion.textContent = "Debes ingresar una calificación numérica";
         mensajeValidacion.classList.add("materias__msjVisible");
         return false;
@@ -155,6 +156,7 @@ function materiaImportante(estrella, textoMateria) {
                 materia.importante = true;
             }
         });
+        materias.length = 0;
         materias.push(...materiasGuardada);
         localStorage.setItem("materias", JSON.stringify(materiasGuardada));
         estrella.classList.toggle("materia__star--active")
