@@ -52,6 +52,7 @@ btnAgregarMateria.addEventListener("click", () => {
     mensajeValidacion.classList.remove("materias__msjVisible");
 
     const materia = {
+        id: Date.now(),
         nombre: textoMateria,
         calificacion: parseFloat(textoCalificacion),
         importante: false
