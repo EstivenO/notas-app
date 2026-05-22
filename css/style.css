@@ -159,6 +159,13 @@ body {
   opacity: 1;
 }
 
+.materia__button-delete {
+    color: red;
+    padding: var(--spacing-sm);
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
 
 .materia__title {
     color: white;
