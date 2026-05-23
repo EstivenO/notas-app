@@ -146,11 +146,11 @@ function eliminarMateria(header, articulo ,materia) {
             return;
         }
 
-        let materiasAlmacenadas = materia.filter(m => m.id !== materia.id);
+        let materiasAlmacenadas = materias.filter(m => m.id !== materia.id);
 
         materias.length = 0;
         materias.push(...materiasAlmacenadas);
-        
+
         localStorage.setItem("materias", JSON.stringify(materias));
 
         articulo.remove();      
