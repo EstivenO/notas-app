@@ -85,7 +85,7 @@ function renderMateria (materia) {
     imagenArticulo.src = "assets/icons/star.svg";
     imagenArticulo.alt = "estrella de prioidad";
 
-    materiaImportante(imagenArticulo, materia.nombre);
+    materiaImportante(imagenArticulo, materia);
     
 
     if(materia.importante) {
@@ -117,57 +117,44 @@ function crearArticulo(elemento,calificacion,materia){
     listaMaterias.appendChild(articulo);
 }
 
-function materiaImportante(estrella, textoMateria) {
+function materiaImportante(estrella, materia) {
     
     estrella.addEventListener("click", ()=>{
-        let materiasGuardada = JSON.parse(localStorage.getItem("materias"));
-        materiasGuardada.forEach(materia => {
-            if(textoMateria === materia.nombre){
-                if(materia.importante){
-                    materia.importante = false;
-                    location.reload();
-                    return;
-                }
-                materia.importante = true;
-                location.reload();
-            }
-        });
-        materias.length = 0;
-        materias.push(...materiasGuardada);
-        localStorage.setItem("materias", JSON.stringify(materiasGuardada));
-        estrella.classList.toggle("materia__star--active")
+        materia.importante = !materia.importante;
+
+        localStorage.setItem("materias", JSON.stringify(materias));
+
+        estrella.classList.toggle("materia__star--active");
     });
 }
 
-function eliminarMateria(header, materia,coleccionMateria) {
-    let btnEliminar = document.createElement("button");
+function eliminarMateria(header, articulo ,materia) {
+    const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "X";
     btnEliminar.classList.add("materia__button-delete");
-
     header.appendChild(btnEliminar);
 
     btnEliminar.addEventListener("click", (e)=> {
         e.stopPropagation();
-        if(coleccionMateria.importante) {
-            mensajeValidacion.textContent = "No se permite elimina una materia destacada";
+        if(materia.importante) {
+            mensajeValidacion.textContent = "No se permite eliminar una materia destacada";
             mensajeValidacion.classList.add("materias__msjVisible");
+            
+            setTimeout(()=> {
+                mensajeValidacion.classList.remove("materias__msjVisible");
+            },2000);
             return;
         }
-        mensajeValidacion.classList.remove("materias__msjVisible");
-        materia.remove();
-        eliminarDeStorage(coleccionMateria);      
 
+        let materiasAlmacenadas = materia.filter(m => m.id !== materia.id);
+
+        materias.length = 0;
+        materias.push(...materiasAlmacenadas);
         
+        localStorage.setItem("materias", JSON.stringify(materias));
+
+        articulo.remove();      
     });
-
-}
-
-function eliminarDeStorage(materiasStorage) {
-    let materiasGuardadas = JSON.parse(localStorage.getItem("materias"));
-    let materiasAlmacenadas = materiasGuardadas.filter(m => m.nombre !== materiasStorage.nombre);
-    materias.length = 0;
-    materias.push(...materiasAlmacenadas);
-    localStorage.setItem("materias", JSON.stringify(materiasAlmacenadas));
 }
 
 function validaciones(materia,calificacion) {
