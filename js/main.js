@@ -13,6 +13,7 @@ const mensajeValidacion = document.querySelector("#mensaje");
 // ==========================
 
 const materias = [];
+let materiaEnEdicion = null;
 
 // ==========================
 // Carga inicial desde localStorage
@@ -50,22 +51,34 @@ btnAgregarMateria.addEventListener("click", () => {
     };
 
     mensajeValidacion.classList.remove("materias__msjVisible");
+    if(materiaEnEdicion) {
 
-    const materia = {
-        id: Date.now(),
-        nombre: textoMateria,
-        calificacion: parseFloat(textoCalificacion),
-        importante: false
+        materiaEnEdicion.nombre = textoMateria;
+        materiaEnEdicion.calificacion = parseFloat(textoCalificacion);
+
+        localStorage.setItem("materias", JSON.stringify(materias));
+
+        materiaEnEdicion = null;
+        btnAgregarMateria.textContent = "Agregar";
+
+        listaMaterias.innerHTML = "";
+        materias.forEach(renderMateria);
+    }else {
+        const materia = {
+            id: Date.now(),
+            nombre: textoMateria,
+            calificacion: parseFloat(textoCalificacion),
+            importante: false
+        }
+
+        materias.push(materia);
+        localStorage.setItem("materias", JSON.stringify(materias))
+
+        renderMateria(materia);
     }
 
-    materias.push(materia);
-    localStorage.setItem("materias", JSON.stringify(materias))
-
-    renderMateria(materia);
-
-    inputMateria.value  = "";
-    inputCalificacion.value = "";
-
+      inputMateria.value  = "";
+      inputCalificacion.value = "";
     
 });
 
@@ -109,6 +122,8 @@ function crearArticulo(elemento,calificacion,materia){
     parrafo.textContent = calificacion;
     
     eliminarMateria(elemento, articulo, materia);
+
+    editarMateria(articulo,materia);
     
     
     articulo.appendChild(elemento);
@@ -155,6 +170,22 @@ function eliminarMateria(header, articulo ,materia) {
 
         articulo.remove();      
     });
+}
+
+function editarMateria(articulo,materia) {
+
+    articulo.addEventListener("click", ()=> {
+        
+        inputMateria.value = materia.nombre;
+        inputCalificacion.value = materia.calificacion;
+        
+        btnAgregarMateria.textContent = "Actualizar";
+
+        materiaEnEdicion = materia;
+
+
+
+    })
 }
 
 function validaciones(materia,calificacion) {
