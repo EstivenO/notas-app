@@ -182,10 +182,7 @@ function editarMateria(articulo,materia) {
         btnAgregarMateria.textContent = "Actualizar";
 
         materiaEnEdicion = materia;
-
-
-
-    })
+    });
 }
 
 function validaciones(materia,calificacion) {
